@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BFC</title> -->
+  </head>
+  <body>
+    <!-- <div
+      style="height: 100px; width: 100px; float: left; background: lightblue"
+    >
+      我是一个左浮动的元素
+    </div>
+    <div
+      style="width: 200px; height: 200px; background: #eee; overflow: hidden"
+    >
+      我是一个没有设置浮动, 也没有触发 BFC 元素, width: 200px; height:200px;
+      background: #eee;
+    </div> -->
+
+    <!-- <svg>
+      <path d="M150 0 L75 200 L225 200 Z" />
+    </svg> -->
+
+    <!-- <div class="box1"><div class="box2"></div></div> -->
+    <!-- <div>
+      <div class="item1">1</div>
+      <div class="item2">2</div>
+      <div class="item3">3</div>
+    </div> -->
+    <svg>
+      <defs>
+      <path id= "path1" d="M75,20 a1,1 0 0,0 100,0" />
+      </defs>
+      <a xlink:href- "http://www.baidu.com target=" blank">
+      <text x="10" y="100" style= "fill:red;">
+      <textPath xlink:href="#path1" > hello welcome to xian</textPath>
+      </text>
+      </a>
+      </svg>
+  </body>
+</html>
+<style>
+
+  .box1 {
+    height: 400px;
+    background: #fad;
+  }
+  .box2 {
+    height: 100px;
+    margin-top: 50px;
+    background: #ade;
+  }
+</style>
+<script>
+  // function Dog() {}
+  // Dog.prototype = {
+  //   bark() {
+  //     console.log(1)
+  //   },
+  // }
+  // const dog = new Dog()
+  // dog.bark()
+  // Dog.prototype.bark = function () {
+  //   console.log(2)
+  // }
+  // dog.bark()
+  // Dog.prototype = {
+  //   bark() {
+  //     console.log(3)
+  //   },
+  // }
+  // dog.bark()
+  const student = { name: 'ZhangSar' }
+  Object.defineProperty(student, 'age', { value: 22 })
+  console.log(student)
+  console.log(Object.keys(student))
+</script>

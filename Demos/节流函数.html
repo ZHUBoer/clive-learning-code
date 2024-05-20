@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>节流函数</title>
+  </head>
+  <body>
+    <button id="button">生成随机数</button>
+  </body>
+</html>
+<script>
+  function thro(func, wait) {
+    let timerOut;
+    return function () {
+      if (!timerOut) {
+        timerOut = setTimeout(function () {
+          func();
+          timerOut = null;
+        }, wait);
+      }
+    };
+  }
+
+  function handle() {
+    console.log(Math.random()); // 在控制台打印
+  }
+  // 点击button就执行thro，这是一种点击事件绑定。
+  document.getElementById("button").onclick = thro(handle, 1000);
+</script>
