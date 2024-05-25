@@ -1,3 +1,3 @@
-#Code_demo
+#Demos
 
 - 自己写算法和代码的仓库
