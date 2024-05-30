@@ -22,8 +22,20 @@ function addTwoNumbers(
   l1: ListNode | null,
   l2: ListNode | null
 ): ListNode | null {
-  return null;
+  let cur1 = l1;
+  let cur2 = l2;
+  const curRes = new ListNode(0);
+  let head = curRes;
+  while (head.next) {
+    const sum = (cur1?.val || 0) + (cur2?.val || 0) + head.val;
+    head.val = sum % 10;
+    if (sum >= 10) {
+      head.next = new ListNode(1);
+    }
+    head = head.next;
+  }
+  return curRes;
 }
 
-console.log(addTwoNumbers(null, null));
+// console.log(addTwoNumbers(null, null));
 // @lc code=end
