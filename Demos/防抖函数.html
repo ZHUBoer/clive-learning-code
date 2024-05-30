@@ -2,12 +2,80 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>防抖</title>
   </head>
-  <body></body>
+  <body>
+    <div class="result">
+      <h2>结果：</h2>
+      <h1
+        class="number"
+        id="numberId"
+      >
+        0
+      </h1>
+    </div>
+    <button
+      class="button"
+      onclick="handleButton()"
+    >
+      计数器
+    </button>
+    <h2 id="countId">0</h2>
+  </body>
 </html>
 <script>
-  
+  let number = 0;
+  let count = 0;
+  function handleButton() {
+    increment();
+    countFunction();
+  }
+  function increment() {
+    number++;
+    document.getElementById('numberId').innerText = number;
+  }
+  function countFunction() {
+    count++;
+    document.getElementById('countId').innerText = count;
+  }
 </script>
+<style>
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding-top: 100px;
+  }
+  .number {
+    color: red;
+    margin: 0 auto;
+  }
+  .button {
+    border-radius: 8px;
+    border: 1px solid gray;
+    margin: 0 auto;
+    margin-top: 50px;
+    font-size: 18px;
+    box-sizing: border-box;
+    padding: 10px 24px;
+    background-color: white;
+  }
+</style>
