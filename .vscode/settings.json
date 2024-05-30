@@ -1,3 +1,6 @@
 {
-  "cSpell.words": ["leetcode"]
+  "cSpell.words": [
+    "leetcode"
+  ],
+  "git.ignoreLimitWarning": true
 }
