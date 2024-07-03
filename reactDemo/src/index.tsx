@@ -9,7 +9,6 @@ class Square extends React.Component {
     // 此处的 state 是直接被 setState 所改变的。
     this.state = {
       value: null,
-      handleClick: this.handleClick.bind(this),
     };
   }
 
@@ -17,7 +16,7 @@ class Square extends React.Component {
     return (
       <button
         className='square'
-        onClick={this.handleClick}
+        // onClick={this.handleClick}
       >
         {this.state.value}
       </button>
@@ -43,7 +42,6 @@ class Board extends React.Component {
     return (
       <Square
         value={i}
-        onClick={this.handleClick(i)}
       />
     );
   }
