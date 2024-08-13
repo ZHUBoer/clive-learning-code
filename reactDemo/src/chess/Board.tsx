@@ -5,7 +5,7 @@ import React from 'react';
 import { Square, SquareProps } from './Square';
 
 /**
- * 如果我们想创建一个新的类型，包含 SquareProps 的所有属性，但不包括 onFillSquare 方法，我们可以使用 Omit 来实现这一点
+ * 如果我们想创建一个新的类型，包含 SquareProps 的所有属性，但不包括 onFillSquare 属性，我们可以使用 Omit 来实现这一点
  */
 
 type Squares = Omit<SquareProps, 'onFillSquare'>[];
