@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // 这是你的应用程序的主题。
-        //
         // 尝试这个：尝试运行你的应用程序并使用"flutter run"。你会看到
         // 应用程序有一个紫色的工具栏。然后，在不退出应用程序的情况下，
         // 尝试将下面的colorScheme中的seedColor更改为Colors.green
