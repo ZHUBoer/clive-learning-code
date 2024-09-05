@@ -15,6 +15,32 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference. -->
 
+## 项目运行
+
+### VScode 开发，需要 Xcode 的 ios 模拟器
+
+1. 安装好最新的模拟器，现在是 iOS_17.5_Simulator_Runtime(.dmg)，`Xcode` 中可查看已安装。[教程](https://blog.csdn.net/weixin_43865875/article/details/135254160)
+2. 根据 [flutter官方教程](https://docs.flutter.cn/get-started/install/macos/mobile-ios#install-cocoapods)，启动模拟器。
+
+  ```shell
+  open -a Simulator
+  ```
+
+3. 检查安装的 `cocoapods`，并启动。
+
+```shell
+# 查看版本
+pod --version
+# 启动
+pod setup
+```
+
+4. 若配置过环境变量，则重启现有终端。检查所有组件的安装情况：
+
+``` shell
+flutter doctor -v
+```
+
 ## Flutter 项目默认目录结构的详细解析
 
 ### 1. 根目录中的文件和文件夹的作用
