@@ -7,7 +7,7 @@ import lodashSet from 'lodash/set';
 import lodashMap from 'lodash/map';
 import { ETheme } from '../types';
 
-export type TChartColorKey = keyof typeof CHART_COLORS[ETheme.light];
+export type TChartColorKey = keyof (typeof CHART_COLORS)[ETheme.light];
 /**
  * 根据当前主题色返回动态的图表颜色列表
  * @param options 图表的固定配置
@@ -27,7 +27,7 @@ export default function useDynamicChart(
     // 设置动态的图表颜色
     lodashSet(newOptions, 'color', dynamicColor.colorList);
     if (configs) {
-      lodashMap(configs, (config, configKey: TChartColorKey) => {
+      lodashMap(configs, (config: string[], configKey: TChartColorKey) => {
         config?.map((val) => lodashSet(newOptions, val, dynamicColor[configKey]));
       });
     }

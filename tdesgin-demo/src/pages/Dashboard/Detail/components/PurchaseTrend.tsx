@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Dropdown, Row, Tag, Card, Avatar } from 'tdesign-react';
+import { Col, Dropdown, Row, Tag, Card, Avatar, DateRangeValue } from 'tdesign-react';
 import { Icon, AddIcon } from 'tdesign-icons-react';
 import ReactEcharts from 'echarts-for-react';
 import LastWeekDatePicker from 'components/DatePicker';
@@ -58,8 +58,9 @@ const options = getLineChartOptions();
 const PurchaseTrend = () => {
   const [customOptions, setCustomOptions] = useState(options);
 
-  const onTimeChange = (value: Array<string>) => {
-    const options = getLineChartOptions(value);
+  const onTimeChange = (value: DateRangeValue) => {
+    const valueArray = value.map((v) => v.toString()); // 将DateRangeValue转换为string数组
+    const options = getLineChartOptions(valueArray);
     setCustomOptions(options);
   };
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Row, Card } from 'tdesign-react';
+import { Col, Row, Card, DateRangeValue } from 'tdesign-react';
 import ReactEcharts from 'echarts-for-react';
 import useDynamicChart from 'hooks/useDynamicChart';
 import LastWeekDatePicker from 'components/DatePicker';
@@ -12,8 +12,9 @@ const pieOptions = getPieChartOptions();
 const MiddleChart = () => {
   const [customOptions, setCustomOptions] = useState(lineOptions);
 
-  const onTimeChange = (value: Array<string>) => {
-    const options = getLineChartOptions(value);
+  const onTimeChange = (value: DateRangeValue) => {
+    const valueArray = value.map((v) => v.toString()); // 将DateRangeValue转换为string数组
+    const options = getLineChartOptions(valueArray);
     setCustomOptions(options);
   };
 

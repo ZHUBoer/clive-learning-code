@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card } from 'tdesign-react';
+import { Button, Card, DateRangeValue } from 'tdesign-react';
 import ReactEcharts from 'echarts-for-react';
 import LastWeekDatePicker from 'components/DatePicker';
 import useDynamicChart from 'hooks/useDynamicChart';
@@ -9,8 +9,9 @@ import Style from './Satisfaction.module.less';
 const Satisfaction = () => {
   const options = getScatterChartOptions();
   const [customOptions, setCustomOptions] = useState(options);
-  const onTimeChange = (value: Array<string>) => {
-    const options = getScatterChartOptions(value);
+  const onTimeChange = (value: DateRangeValue) => {
+    const valueArray = value.map((v) => v.toString()); // 将DateRangeValue转换为string数组
+    const options = getScatterChartOptions(valueArray);
     setCustomOptions(options);
   };
 

@@ -14,7 +14,7 @@
   </a>
 </p>
 
-简体中文 | [English](./README.md) 
+简体中文 | [English](./README.md)
 
 ### 项目简介
 
@@ -94,4 +94,3 @@ npm run lint:fix
 ### 开源协议
 
 TDesign 遵循 [MIT 协议](https://github.com/Tencent/tdesign-react-starter/LICENSE)。
-
