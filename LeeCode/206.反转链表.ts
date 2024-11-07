@@ -69,18 +69,17 @@
  * }
  */
 
-class ListNode {
-  val: number
-  next: ListNode | null
-  constructor(val?: number, next?: ListNode | null) {
-    this.val = (val === undefined ? 0 : val)
-    this.next = (next === undefined ? null : next)
-  }
-}
-
+// @ts-ignore
 function reverseList(head: ListNode | null): ListNode | null {
-let pre = null;
-  return null;
+  let pre = null;
+  let cur = head;
+  while (cur) {
+    let tmp = cur.next;
+    cur.next = pre;
+    pre = cur;
+    cur = tmp;
+  }
+  return pre;
 };
 // @lc code=end
 
