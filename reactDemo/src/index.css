@@ -5,8 +5,8 @@
 */
 
 /* 引入公共样式，用于打包 */
-@import './global.css';
-@import './theme-pack.css';
+/* @import './global.css';
+@import './theme-pack.css'; */
 
 body {
   font: 14px "Century Gothic", Futura, sans-serif;

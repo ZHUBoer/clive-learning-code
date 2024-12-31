@@ -195,32 +195,32 @@ $spacing-scale: (
   line-height: 18px;
 
   &-secondary {
-    color: var(--clive-color-text-secondary);
+    color: var(--bo-color-text-secondary);
   }
 
   &-primary {
-    color: var(--clive-color-text-primary);
+    color: var(--bo-color-text-primary);
   }
 
   &-tertiary {
-    color: var(--clive-color-text-tertiary);
+    color: var(--bo-color-text-tertiary);
   }
 
   &-brand {
-    color: var(--clive-color-text-brand-default);
+    color: var(--bo-color-text-brand-default);
   }
 
   &-brand-hover {
-    color: var(--clive-color-text-brand-hover);
+    color: var(--bo-color-text-brand-hover);
   }
 
   &-danger {
-    color: var(--clive-color-text-error-default);
+    color: var(--bo-color-text-error-default);
   }
 }
 
 .underline {
-  border-bottom: 1px dashed var(--clive-color-border-tertiary-hover);
+  border-bottom: 1px dashed var(--bo-color-border-tertiary-hover);
   padding-bottom: 2px;
   cursor: pointer;
 }
@@ -229,7 +229,7 @@ $spacing-scale: (
   cursor: pointer;
   display: inline-flex;
   font-weight: 600;
-  text-decoration: underline solid var(--clive-color-text-primary);
+  text-decoration: underline solid var(--bo-color-text-primary);
 }
 
 // 查看更多
@@ -245,7 +245,7 @@ $spacing-scale: (
   }
 
   &:hover {
-    color: var(--clive-color-text-primary);
+    color: var(--bo-color-text-primary);
 
     svg {
       transform: translateX(3px);
@@ -253,10 +253,10 @@ $spacing-scale: (
   }
 
   &__brand {
-    color: var(--clive-color-text-brand-default);
+    color: var(--bo-color-text-brand-default);
 
     &:hover {
-      color: var(--clive-color-text-brand-hover);
+      color: var(--bo-color-text-brand-hover);
 
       svg {
         transform: none;
@@ -271,13 +271,13 @@ $spacing-scale: (
 
 .primary-hover {
   &:hover {
-    color: var(--clive-color-text-brand-hover) !important;
+    color: var(--bo-color-text-brand-hover) !important;
   }
 }
 
 .click-bg {
   &:hover {
-    background: var(--clive-color-bg-secondary-default);
+    background: var(--bo-color-bg-secondary-default);
   }
 }
 
@@ -309,10 +309,10 @@ $spacing-scale: (
   font-size: 12px;
   line-height: 20px;
   cursor: pointer;
-  color: var(--clive-color-text-brand-default) !important;
+  color: var(--bo-color-text-brand-default) !important;
 
   &:hover {
-    color: var(--clive-color-text-brand-hover) !important;
+    color: var(--bo-color-text-brand-hover) !important;
   }
 }
 
@@ -382,13 +382,13 @@ $spacing-scale: (
 .divide-x-16 {
   height: 16px;
   width: 1px;
-  background-color: var(--clive-color-border-secondary-default);
+  background-color: var(--bo-color-border-secondary-default);
 }
 
 .divide-x-12 {
   height: 12px;
   width: 1px;
-  background-color: var(--clive-color-border-primary-default);
+  background-color: var(--bo-color-border-primary-default);
 }
 
 .ease-in-out {
@@ -460,15 +460,15 @@ $spacing-scale: (
 }
 
 .color-text-tertiary {
-  color: var(--clive-color-text-tertiary) !important;
+  color: var(--bo-color-text-tertiary) !important;
 }
 
 .color-text-brand {
-  color: var(--clive-color-text-brand-default) !important;
+  color: var(--bo-color-text-brand-default) !important;
 }
 
 .color-text-secondary {
-  color: var(--clive-color-text-secondary) !important;
+  color: var(--bo-color-text-secondary) !important;
 }
 
 .text-base {
@@ -484,18 +484,18 @@ $spacing-scale: (
 }
 
 .cloudapp-dashed-line {
-  border-bottom: 1px dashed var(--clive-color-border-tertiary-hover);
+  border-bottom: 1px dashed var(--bo-color-border-tertiary-hover);
   padding-bottom: 1px;
   cursor: pointer;
 }
 
 .cloudapp-solid-line {
-  border-bottom: 1px solid var(--clive-color-border-tertiary-hover);
+  border-bottom: 1px solid var(--bo-color-border-tertiary-hover);
   padding-bottom: 1px;
   cursor: pointer;
 
   &-primary {
-    border-bottom: 1px solid var(--clive-color-text-primary);
+    border-bottom: 1px solid var(--bo-color-text-primary);
   }
 }
 
