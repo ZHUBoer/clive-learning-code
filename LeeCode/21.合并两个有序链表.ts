@@ -84,11 +84,11 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
       p.next = list2;
       list2 = list2.next;
     }
-    p = p.next;
+    p = p.next; // 单轮循环的结束
   }
 
   p.next = list2 == null ? list1 : list2;
   return head.next;
 };
-// @lc code=end
 
+// @lc code=end

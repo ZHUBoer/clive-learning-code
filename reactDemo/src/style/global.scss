@@ -1,0 +1,528 @@
+$spacing-scale: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 20px,
+  6: 24px,
+  7: 28px,
+  8: 32px,
+  9: 36px,
+  10: 40px,
+  11: 44px,
+  12: 48px,
+  13: 52px,
+  14: 56px,
+  15: 60px,
+  16: 64px,
+  17: 68px,
+  18: 72px,
+  19: 76px,
+  20: 80px,
+  21: 84px,
+  22: 88px,
+  23: 92px,
+  24: 96px,
+  25: 100px,
+  26: 104px,
+  27: 108px,
+  28: 112px,
+  29: 116px,
+  30: 120px,
+  31: 124px,
+  32: 128px,
+  33: 132px,
+  34: 136px,
+  35: 140px,
+  36: 144px,
+  37: 148px,
+  38: 152px,
+  39: 156px,
+  40: 160px,
+  41: 164px,
+  42: 168px,
+  43: 172px,
+  44: 176px,
+  45: 180px,
+  46: 184px,
+  47: 188px,
+  48: 192px,
+  49: 196px,
+  50: 200px,
+  51: 204px,
+  52: 208px,
+  53: 212px,
+  54: 216px,
+  55: 220px,
+  56: 224px,
+  57: 228px,
+  58: 232px,
+  59: 236px,
+  60: 240px,
+  61: 244px,
+  62: 248px,
+  63: 252px,
+  64: 256px,
+  65: 260px,
+  66: 264px,
+  67: 268px,
+  68: 272px,
+  69: 276px,
+  70: 280px,
+  71: 284px,
+  72: 288px,
+  73: 292px,
+  74: 296px,
+  75: 300px,
+  76: 304px,
+  77: 308px,
+  78: 312px,
+  79: 316px,
+  80: 320px,
+  81: 324px,
+  82: 328px,
+  83: 332px,
+  84: 336px,
+  85: 340px,
+  86: 344px,
+  87: 348px,
+  88: 352px,
+  89: 356px,
+  90: 360px,
+  91: 364px,
+  92: 368px,
+  93: 372px,
+  94: 376px,
+  95: 380px,
+  96: 384px,
+  97: 388px,
+  98: 392px,
+  99: 396px,
+  100: 400px,
+);
+
+@each $key, $value in $spacing-scale {
+  .flex-row-#{$key} {
+    gap: $value;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .flex-column-#{$key} {
+    gap: $value;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .max-w-#{$key} {
+    max-width: $value;
+  }
+
+  .max-h-#{$key} {
+    max-height: $value;
+  }
+
+  .min-w-#{$key} {
+    min-width: $value;
+  }
+
+  .min-h-#{$key} {
+    min-height: $value;
+  }
+
+  .ml-#{$key} {
+    margin-left: $value;
+  }
+
+  .mr-#{$key} {
+    margin-right: $value;
+  }
+
+  .mt-#{$key} {
+    margin-top: $value;
+  }
+
+  .mb-#{$key} {
+    margin-bottom: $value;
+  }
+
+  .pl-#{$key} {
+    padding-left: $value;
+  }
+
+  .pr-#{$key} {
+    padding-right: $value;
+  }
+
+  .pt-#{$key} {
+    padding-top: $value;
+  }
+
+  .pb-#{$key} {
+    padding-bottom: $value;
+  }
+
+  .gap-#{$key} {
+    gap: $value;
+  }
+
+  .gap-x-#{$key} {
+    column-gap: $value;
+  }
+
+  .gap-y-#{$key} {
+    row-gap: $value;
+  }
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.object-contain {
+  object-fit: contain;
+}
+
+.text {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+
+  &-secondary {
+    color: var(--clive-color-text-secondary);
+  }
+
+  &-primary {
+    color: var(--clive-color-text-primary);
+  }
+
+  &-tertiary {
+    color: var(--clive-color-text-tertiary);
+  }
+
+  &-brand {
+    color: var(--clive-color-text-brand-default);
+  }
+
+  &-brand-hover {
+    color: var(--clive-color-text-brand-hover);
+  }
+
+  &-danger {
+    color: var(--clive-color-text-error-default);
+  }
+}
+
+.underline {
+  border-bottom: 1px dashed var(--clive-color-border-tertiary-hover);
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.text-underline {
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 600;
+  text-decoration: underline solid var(--clive-color-text-primary);
+}
+
+// 查看更多
+.more-view {
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 1s ease-in-out;
+
+  svg {
+    color: inherit;
+  }
+
+  &:hover {
+    color: var(--clive-color-text-primary);
+
+    svg {
+      transform: translateX(3px);
+    }
+  }
+
+  &__brand {
+    color: var(--clive-color-text-brand-default);
+
+    &:hover {
+      color: var(--clive-color-text-brand-hover);
+
+      svg {
+        transform: none;
+      }
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.primary-hover {
+  &:hover {
+    color: var(--clive-color-text-brand-hover) !important;
+  }
+}
+
+.click-bg {
+  &:hover {
+    background: var(--clive-color-bg-secondary-default);
+  }
+}
+
+.rotate-0 {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotate-360 {
+  transform: rotate(360deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.padding-2-8 {
+  padding: 2px 8px;
+}
+
+.text-primary-operate {
+  font-size: 12px;
+  line-height: 20px;
+  cursor: pointer;
+  color: var(--clive-color-text-brand-default) !important;
+
+  &:hover {
+    color: var(--clive-color-text-brand-hover) !important;
+  }
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.section-title {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.relative {
+  position: relative;
+}
+
+.text {
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-left {
+    text-align: left;
+  }
+}
+
+.items {
+  &-center {
+    align-items: center;
+  }
+
+  &-start {
+    align-items: flex-start;
+  }
+
+  &-end {
+    align-items: flex-end;
+  }
+
+  &-baseline {
+    align-items: baseline;
+  }
+}
+
+.divide-x-16 {
+  height: 16px;
+  width: 1px;
+  background-color: var(--clive-color-border-secondary-default);
+}
+
+.divide-x-12 {
+  height: 12px;
+  width: 1px;
+  background-color: var(--clive-color-border-primary-default);
+}
+
+.ease-in-out {
+  transition: transform 0.3s ease-in-out;
+}
+
+.ease-in {
+  transition: transform 0.3s ease-in;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.none {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.leading-2 {
+  line-height: 14px;
+}
+
+.leading-5 {
+  line-height: 20px;
+}
+
+.leading-6 {
+  line-height: 22px;
+}
+
+.shadow-none {
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: none;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.color-text-tertiary {
+  color: var(--clive-color-text-tertiary) !important;
+}
+
+.color-text-brand {
+  color: var(--clive-color-text-brand-default) !important;
+}
+
+.color-text-secondary {
+  color: var(--clive-color-text-secondary) !important;
+}
+
+.text-base {
+  font-size: 16px;
+}
+
+// 超出省略
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cloudapp-dashed-line {
+  border-bottom: 1px dashed var(--clive-color-border-tertiary-hover);
+  padding-bottom: 1px;
+  cursor: pointer;
+}
+
+.cloudapp-solid-line {
+  border-bottom: 1px solid var(--clive-color-border-tertiary-hover);
+  padding-bottom: 1px;
+  cursor: pointer;
+
+  &-primary {
+    border-bottom: 1px solid var(--clive-color-text-primary);
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+// 设置三行省略
+.line-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5em;
+  max-height: 4.5em;
+  word-break: break-word;
+}

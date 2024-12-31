@@ -1,3 +1,13 @@
+/*
+* 在使用@import语句引入样式时，在一行样式的结尾需要加分号;
+* 在html文档中使用@import时，需要在style标签里面；
+* 不建议使用@import语句，因为@import引入的 CSS 将在页面加载完毕后才被加载,所以会出现一开始没有 css 样式，闪烁一下出现样式后的页面 (网速慢的情况下)。 
+*/
+
+/* 引入公共样式，用于打包 */
+@import './global.css';
+@import './theme-pack.css';
+
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
