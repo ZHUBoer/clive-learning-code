@@ -2,6 +2,8 @@
 
 # dependencies
 /reactDemo/node_modules
+/bo-react/node_modules
+/bo-react/package-lock.json
 
 # testing
 
