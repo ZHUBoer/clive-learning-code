@@ -2,23 +2,21 @@ import React from 'react';
 // @ts-ignore
 import logo from './logo.svg';
 import './App.css';
+import Button from './components/button'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
+        <Button
           className="App-link"
-          href="https://reactjs.org"
+          href="https://cva.style/docs/examples/react/tailwind-css"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
-        </a>
+          Learn cva
+        </Button>
       </header>
     </div>
   );

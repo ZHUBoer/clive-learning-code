@@ -5,9 +5,11 @@
   "dependencies": {
     "@testing-library/react": "^16.1.0",
     "cra-template-typescript": "1.2.0",
+    "lodash": "^4.17.21",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
+    "tdesign-react": "^1.10.5",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
@@ -33,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.15"
   }
 }
