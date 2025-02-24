@@ -107,38 +107,18 @@ let tree = new treeNode("root");
 // console.log(tree);
 // treeNode { val: 'root', left: null, right: null }
 
-// 深拷贝和浅拷贝都是针对数组和对象的
-function cloneDeep(obj) {
-  let cloneObj = Array.isArray(obj) ? [] : {}; // 判断是数组还是对象
-  // 若不为null，且是数组或对象；空数组和空对象在条件判断时都是true。
-  if (obj && typeof obj === "object") {
-    // 对每个属性都遍历处理
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if ((obj[key] && typeof obj[key]) === "object") {
-          cloneObj[key] = cloneDeep(obj[key]);
-        } else {
-          cloneObj[key] = obj[key];
-        }
-      }
-    }
-  }
-  return cloneObj;
-}
-let obj = [1, 2, 3, [1, 2, [3, 2]]];
-// console.log(cloneDeep(obj));
-
-// 发布订阅的实现
-// 初始化设计
+// 实现发布订阅
+// 初始化设计, 使用队列来实现
 // const eventHub = {
-//   on: () => {},
-//   emit: () => {},
-//   off: () => {},
-//   once: () => {},
+//   on: (eventName, callback) => {},
+//   emit: (eventName, ...arguments) => {},
+//   off: (eventName, callback) => {},
+//   once: (eventName, callback) => {},
 // };
-// eventHub.on("click", fn); // 添加监听事件
-// eventHub.off("click", fn); // 取消监听
-// eventHub.emit("click", "frank"); // 执行事件队列，将frank作为事件队列中对应的回调函数的入参。
+// eventHub.on("click", fn); // 注册订阅
+// eventHub.off("click", fn); // 取消订阅
+// eventHub.emit("click", 'frank'); // 发布，执行事件队列，将 'frank'作为事件队列中对应的回调函数的入参。
+// eventHub.once("click", fn); // 单次注册订阅，执行一次就会取消订阅
 
 // 具体实现
 // 创建一个类，初始化一个事件存储中心
@@ -170,7 +150,7 @@ class EventEmitter {
   // 找到对应的回调函数，删除对应的回调函数；
   off(eventName, callback) {
     const callbacks = this._events[eventName] || [];
-    const newCallbacks = callbacks.filter((item) => item != callback);
+    const newCallbacks = callbacks.filter((item) => item !== callback);
     this._events[eventName] = newCallbacks;
   }
 
@@ -227,7 +207,7 @@ function currying(fn) {
   }
 }
 let addCurry = currying(add);
-console.log(addCurry(1)(2)(3)());
+// console.log(addCurry(1)(2)(3)());
 
 // instanceof
 function myInstanceof(left, right) {
@@ -379,7 +359,7 @@ let dog3 = new Dog1("dack");
  * 但方法必须定义在构造函数中，导致每次创建子类实例都会创建一遍方法。
  */
 
-// TODO:组合继承，结合原型链和构造函数
+// TODO: 组合继承，结合原型链和构造函数
 // 基本思路是使用原型链继承原型上的方法和属性，通过构造函数继承实例属性。
 // 既可以吧方法定义在原型上以实现重用，又能每个实例都有自己的属性。
 function Animal2(name) {
@@ -432,80 +412,30 @@ let dog6 = new Dog3("liu", 26);
 // console.log(dog6.getName()); // liu
 
 // 测试Map的特性
-// let map = new Map();
-// map.set(1, 5);
-// map.set(1, 4);
-// console.log(map);
+let map = new Map();
+map.set(1, 5);
+map.set(2, 4);
+map.set(1, 3); // 将 1 => 5变成1 => 3
+// console.log(map); // Map(2) { 1 => 3, 2 => 4 }
 // console.log(map.constructor); // [Function: Map]
 
+/**
+ * 当你调用 `[1, 2, 3].map(parseInt)` 时，实际上 `parseInt` 会接收到三个参数：
+ * - `当前值`（array element）
+ * - `当前索引`（index）
+ * - `原数组`（array）
+ * 因此，执行过程如下：
+ * - 对于第一个元素 `1`，`parseInt` 被调用：`parseInt(1, 0)`（index为0，0表示自动推断基数，结果为1）
+ * - 对于第二个元素 `2`，`parseInt` 被调用：`parseInt(2, 1)`（index为1，1不是有效基数，结果为NaN）
+ * - 对于第三个元素 `3`，`parseInt` 被调用：`parseInt(3, 2)`（index为2，2表示二进制，结果为NaN）
+ */
+// console.log(488,[1, 2, 3].map(parseInt));
 
-// 深拷贝
-function cloneDeep5(x) {
-  const root = {};
-
-  // 栈
-  const loopList = [
-    {
-      parent: root,
-      key: undefined,
-      data: x,
-    }
-  ];
-
-  while (loopList.length) {
-    // 广度优先
-    const node = loopList.pop();
-    const parent = node.parent;
-    const key = node.key;
-    const data = node.data;
-
-    // 初始化赋值目标，key为undefined则拷贝到父元素，否则拷贝到子元素
-    let res = parent;
-    if (typeof key !== 'undefined') {
-      res = parent[key] = {};
-    }
-
-    for (let k in data) {
-      if (data.hasOwnProperty(k)) {
-        if (typeof data[k] === 'object') {
-          // 下一次循环
-          loopList.push({
-            parent: res,
-            key: k,
-            data: data[k],
-          });
-        } else {
-          res[k] = data[k];
-        }
-      }
-    }
-  }
-
-  return root;
-}
-
-const ads = [1, 2];
-console.log([1, 2, 3].map(parseInt));
-
-const arrayT = [[3, 'three'], [1, 'one'],
-[2, 'two']
+const arrayT = [
+  [3, 'three'],
+  [1, 'one'],
+  [2, 'two']
 ];
 const mapT = new Map(arrayT);  // 数组转map
-console.log(mapT); // map
-console.log(new Map(arrayT.sort((a, b) => a[0] - b[0])))
-
-// string找最大重复 不区分大小写
-const stringT = 'ahsdoalshdasadAHJGS';
-const sortStringToMap = (sT) => {
-  const s = sT.toLowerCase();
-  const mapS = new Map();
-  for (let i = 0; i < s.length; i++) {
-    if (mapS.has(s[i])) {
-      mapS.set(s[i], mapS.get(s[i]) + 1);
-    } else {
-      mapS.set(s[i], 1);
-    }
-  }
-  return (Array.from(mapS).sort((a, b) => b[1] - a[1]))[0];
-}
-console.log(sortStringToMap(stringT)); // [ 'a', 5 ]
+// console.log(mapT); // map
+// console.log(new Map(arrayT.sort((a, b) => a[0] - b[0]))); // 升序排列的数组
