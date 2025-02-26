@@ -91,3 +91,42 @@ class EventEmitterPro {
     this.on(eventName, one);
   }
 }
+
+// 使用 map数据结构作为 events的存储
+// 发布订阅
+class EventEmitter {
+  constructor() {
+    this.events = new Map();
+  }
+
+  on(eventName, handler) {
+    if (!this.events.has(eventName)) {
+      this.events.set(eventName, []);
+    }
+    this.events.get(eventName).push(handler);
+  }
+
+  emit(eventName, ...args) {
+    if (this.events.has(eventName)) {
+      this.events.get(eventName).forEach((handler) => {
+        handler(...args);
+      });
+    }
+  }
+
+  off(eventName, handler) {
+    if (this.events.has(eventName)) {
+      // 删除指定事件的所有回调
+      this.events.set(eventName, this.events.get(eventName).filter((h) => h !== handler));
+    }
+  }
+
+  once(eventName, handler) {
+    // 监听事件，并且只触发一次
+    const onceHandler = (...args) => {
+      handler(...args);
+      this.off(eventName, onceHandler);
+    };
+    this.on(eventName, onceHandler);
+  }
+}
