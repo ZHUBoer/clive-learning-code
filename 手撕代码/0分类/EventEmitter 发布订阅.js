@@ -94,7 +94,7 @@ class EventEmitterPro {
 
 // 使用 map数据结构作为 events的存储
 // 发布订阅
-class EventEmitter {
+class EventEmitterMap {
   constructor() {
     this.events = new Map();
   }
