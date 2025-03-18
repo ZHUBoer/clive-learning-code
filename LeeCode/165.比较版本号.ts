@@ -90,8 +90,8 @@ function compareVersion(version1: string, version2: string): number {
     if (num1 > num2) return 1;
     if (num1 < num2) return -1;
   }
-
   return 0
 };
 // @lc code=end
+
 
