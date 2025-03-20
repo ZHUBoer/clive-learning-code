@@ -74,7 +74,7 @@
 function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
   //@ts-ignore
   let head = new ListNode(0);
-  let p = head; // TODO:哨兵
+  let p = head;
 
   while (list1 && list2) {
     if (list1.val <= list2.val) {
