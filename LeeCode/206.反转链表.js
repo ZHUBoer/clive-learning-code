@@ -64,20 +64,33 @@
  *     this.next = (next===undefined ? null : next)
  * }
  */
+
+class LinkNode {
+  constructor(val, next) {
+    this.val = val !== undefined ? val : 0;
+    this.next = next !== undefined ? next : null;
+  }
+}
+
+console.log(new LinkNode(0));
+
 /**
+ * 反转链表
  * @param {ListNode} head
  * @return {ListNode}
  */
 var reverseList = function (head) {
   // 迭代算法-反转链表
-  let prev = null;
-  let curr = head;
-  while (curr !== null) {
-    let nextTemp = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = nextTemp;
+  // 新建一个结果节点，目前是 null，仅有一个null节点（也是所有链表的尾部指向。
+  let res = new LinkNode(null);
+  while (head !== null) {
+    // 保存下一个节点，因为我们需要将当前节点指向新节点，而当前节点需要被保存。
+    let next = head.next;
+    head.next = res;
+    res = head;
+    head = next;
   }
-  return prev;
 };
 // @lc code=end
+
+
