@@ -1,4 +1,4 @@
-// promise.all的并发限流实现 TODO: 持续优化
+// promise.all的并发限流实现，并发数可配置
 Promise.limitedAll = function (promises, maxConcurrent = 15) {
   return new Promise((resolve, reject) => {
     if (promises.length === 0) {
@@ -9,37 +9,40 @@ Promise.limitedAll = function (promises, maxConcurrent = 15) {
     const results = new Array(promises.length);
     let currentIndex = 0;
     let runningCount = 0;
-    let completedCount = 0;
-    let aborted = false; // 新增的标记位
+    let aborted = false;
 
-    function runNext() {
-      if (aborted) return; // 如果已经abort，不再处理
-
+    // 优化后的任务调度器
+    const schedule = () => {
+      // 只要有空闲通道且有待处理任务就立即执行
       while (runningCount < maxConcurrent && currentIndex < promises.length) {
-        const index = currentIndex++;
-        const promise = Promise.resolve(promises[index]);
-
+        const index = currentIndex++; // 保持任务顺序的关键
         runningCount++;
-        promise.then(value => {
-          results[index] = value;
-        }).catch(error => {
-          aborted = true; // 标记为已中止
-          reject(error);
-        }).finally(() => {
-          runningCount--;
-          completedCount++;
 
-          if (completedCount === promises.length) {
-            resolve(results);
-          } else {
-            runNext();
-            // setImmediate(runNext); // 避免递归调用导致的栈溢出问题。
-          }
-        });
+        Promise.resolve(promises[index]())
+          .then(value => {
+            results[index] = value;
+          })
+          .catch(error => {
+            if (!aborted) {
+              aborted = true;
+              reject(error);
+            }
+          })
+          .finally(() => {
+            runningCount--;
+            // 立即调度新任务（而不是等待当前批次）
+            if (!aborted) schedule();
+          });
       }
-    }
 
-    runNext();
+      // 最终完成检查
+      if (!aborted && runningCount === 0 && currentIndex === promises.length) {
+        resolve(results);
+      }
+    };
+
+    // 启动初始批次
+    schedule();
   });
 };
 
@@ -103,7 +106,7 @@ function createTask(id, delay = 100, shouldReject = false) {
 async function testBasicConcurrency() {
   const tasks = [
     createTask(1, 300),
-    createTask(2, 200),
+    createTask(2, 2000),
     createTask(3, 400),
     createTask(4, 100),
     createTask(5, 50)
@@ -210,6 +213,30 @@ async function testOrderPreserving() {
     .then(() => console.log('✅ 顺序保持测试通过'))
     .catch(console.error);
 })();
+
+/**
+ * 串行执行所有Promise任务（按数组顺序逐个执行）
+ * @param {Array<Promise|function>} promises Promise数组或返回Promise的函数数组
+ * @returns {Promise<Array>} 返回的Promise解析后是按原始顺序排列的结果数组
+ */
+Promise.serialAll = promises =>
+  promises.reduce(
+    // 使用reduce构建Promise链式调用，每一轮迭代中，chain参数代表的是当前累积的Promise链。
+    // 每次迭代都会通过.then()方法将新的Promise添加到链中，从而保证顺序执行。
+    (chain, promise, index) =>
+      chain.then(results =>
+        // 将每个Promise按顺序串联到执行链中
+        Promise.resolve(promise).then(value => {
+          // 保持结果顺序的关键：通过闭包保存当前Promise的索引位置
+          results[index] = value;
+          return results; // 将更新后的结果数组传递给下一个then
+        })
+      ),
+    // 初始化空结果数组（保留数组长度和空位）
+    Promise.resolve(Array.from({ length: promises.length }))
+  );
+
+
 
 
 
