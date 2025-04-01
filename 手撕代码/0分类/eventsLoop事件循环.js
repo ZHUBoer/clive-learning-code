@@ -71,7 +71,8 @@ console.log('script start');
 
 async function async1() {
   await async2();
-  console.log('async1 end'); // 放入微任务 1 
+  console.log('async1 end');
+  // 放入微任务 1，await之后的任务都会放入微任务中，不管你是不是同步代码。
 }
 
 async function async2() {
@@ -81,7 +82,7 @@ async function async2() {
 async1();
 
 setTimeout(function () {
-  console.log('setTimeout'); // 放入宏任务 1
+  console.log('setTimeout');
 }, 0)
 
 new Promise(resolve => {
@@ -89,10 +90,10 @@ new Promise(resolve => {
   resolve();
 })
   .then(function () {
-    console.log('promise1'); // 放入微任务 2 
+    console.log('promise1');
   })
   .then(function () {
-    console.log('promise2'); // 放入微任务 3 
+    console.log('promise2');
   })
 
 console.log('script end');
