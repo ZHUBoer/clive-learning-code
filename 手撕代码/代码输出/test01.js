@@ -1,21 +1,22 @@
 // // hooks 封装
-// export function useInterval(fn, delay, times, deps) {
-//   useEffect(()=>{
-//     let timer = setTimeout(function run() {
-//       fn(deps);
-//       if (times > 0) {
-//         times--;
-//       }
-//       timer = setTimeout(run, delay);
-//       if (times !== undefined && times <= 0) {
-//         clearTimeout(timer);
-//       }
-//     }, delay);
-//     return function() {
-//       clearTimeout(timer);
-//     }
-//   },[deps]);
-// }saa
+export function useInterval(fn, delay, times, deps) {
+  useEffect(
+    () => {
+      let timer = setTimeout(function run() {
+        fn(deps);
+        if (times > 0) {
+          times--;
+        }
+        timer = setTimeout(run, delay);
+        if (times !== undefined && times <= 0) {
+          clearTimeout(timer);
+        }
+      }, delay);
+      return function () {
+        clearTimeout(timer);
+      }
+    }, [deps]);
+}
 
 // 可以逐步实现选择器的深度
 // 比如实现class
@@ -53,9 +54,29 @@ const parse = (selector) => {
   const _className = String(selector)
   // child
   const _child = String(selector).split(' ')[1];
-  if(_child) {
-   let tmp = parse(_child);
-   resObj.child = tmp;
+  if (_child) {
+    let tmp = parse(_child);
+    resObj.child = tmp;
   }
   return resObj;
+};
+
+export const useInterval = (fn, delay, times, deps) => {
+  useEffect(
+    () => {
+      let timer = setTimeout(
+        function run() {
+          fn(deps);
+          if (times > 0) {
+            times--;
+          }
+          timer = setTimeout(run, delay);
+          if (times !== undefined && times <= 0) {
+            clearTimeout(timer);
+          }
+        }, delay);
+      return function () {
+        clearTimeout(timer);
+      }
+    }, [deps]);
 };

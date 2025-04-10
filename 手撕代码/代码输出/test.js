@@ -1,16 +1,3 @@
-// function getSomething() {
-//   return "something";
-// }
-// async function testAsync() {
-//   return Promise.resolve("hello async");
-// }
-// async function test() {
-//   const v1 = await getSomething(); // 此时await没影响
-//   const v2 = await testAsync();
-//   console.log(v1, v2);
-// }
-// test();
-
 // 关于原型链的输出问题
 function Foo() {
   getName = function () {
@@ -34,22 +21,14 @@ function getName() {
  * 在函数赋值语句，先在当前作用域内部寻找有无该变量，若无；则去上一级作用域找，直到最外层的window，若找不到，就创建该函数。
  */
 
-//请写出以下输出结果：
-// Foo.getName();
-// getName();
-// Foo().getName();
-// getName();
-// new Foo.getName();
-// new Foo().getName();
-// new new Foo().getName();
-
-// Foo.getName(); // 2
-// getName(); // 4
-// Foo().getName(); // 1
-// getName(); // 1
-// new Foo.getName(); // 2
-// new Foo().getName(); // 3
-// new new Foo().getName(); // 3
+// 请写出以下输出结果：
+Foo.getName(); // 2
+getName(); // 4
+Foo().getName(); // 1
+getName(); // 1
+new Foo.getName(); // 2
+new Foo().getName(); // 3
+new new Foo().getName(); // 3
 
 // 考察执行作用域
 // function bar() {
@@ -203,12 +182,12 @@ const BinarySearch = function (nums, key, left, right) {
 // let funcA = a.getA;
 // funcA();  // funcA()的执行上下文是window => 执行结果是 ‘ByteDance1’
 
-var quo=function(string){
-  this.status=string;
+var quo = function (string) {
+  this.status = string;
 }
-quo.prototype.get_status=function(){
+quo.prototype.get_status = function () {
   return this.status;
 }
-var qq=new quo("aaa");
+var qq = new quo("aaa");
 console.log(qq.get_status());
 

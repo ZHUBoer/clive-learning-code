@@ -46,6 +46,44 @@ Promise.limitedAll = function (promises, maxConcurrent = 15) {
   });
 };
 
+// promise.all的串行实现
+Promise.serialAll = function (promises) {
+  return new Promise((resolve, reject) => {
+    const results = [];
+    let index = 0;
+
+    function next() {
+      if (index >= promises.length) {
+        resolve(results);
+        return;
+      }
+
+      Promise.resolve(promises[index])
+        .then(value => {
+          results[index] = value;
+          index++;
+          next(); // 递归执行下一个
+        })
+        .catch(reject);
+    }
+
+    next(); // 启动串行链
+  });
+};
+
+// 使用 reduce 实现更简洁的串行链
+Promise.serialAll = promises =>
+  promises.reduce((chain, promise, index) =>
+    chain.then(results =>
+      Promise.resolve(promise)
+        .then(value => {
+          results[index] = value;
+          return results;
+        })
+    ),
+    Promise.resolve([])
+  );
+
 // 测试代码
 function createTask(id, delay = 100, shouldReject = false) {
   return () =>
