@@ -3,7 +3,17 @@
 // 发布订阅
 
 // 防抖
-
+const debounce = (fn, delay) => {
+  let timer;
+  return function () {
+    let content = this;
+    let args = arguments
+    clearInterval(timer);
+    timer = setTimeout(() => {
+      fn.apply(content, args);
+    }, delay);
+  }
+}
 // 节流
 
 // ajax实现请求的并发控制

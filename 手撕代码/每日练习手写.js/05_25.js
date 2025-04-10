@@ -1,19 +1,33 @@
-// 使用Proxy实现 访问array[-1]
+// 使用Proxy实现访问array[-1]
 let array = [1, 2, 3];
 
 array = new Proxy(array, {
   get(target, prop, receiver) {
-    if (prop < 0) {
-      // 即使我们像 arr[1] 这样访问它
-      // prop 是一个字符串，所以我们需要将其转换成数字
-      prop = +prop + target.length; // 隐式转换 使用符号将其转为数值
+    // 将属性转换为字符串处理
+    const strProp = String(prop);
+
+    // 尝试转换为数字并验证是否为整数
+    const numericProp = Number(strProp);
+    if (Number.isInteger(numericProp)) {
+      // 处理负数索引
+      if (numericProp < 0) {
+        prop = numericProp + target.length;
+      }
+      // 验证转换后的索引有效性
+      if (prop >= 0 && prop < target.length) {
+        return Reflect.get(target, prop, receiver);
+      }
     }
+
+    // 非数字属性或无效索引直接返回原始属性
     return Reflect.get(target, prop, receiver);
-  },
+  }
 });
 
 console.log(array[-1]); // 3
 console.log(array[-2]); // 2
+console.log(array.length); // 3（正常访问length属性）
+console.log(array[1.5]); // undefined（保持原生数组行为）
 
 
 // ajax控制并发请求的数量
