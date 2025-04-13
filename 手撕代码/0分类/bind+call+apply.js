@@ -1,59 +1,54 @@
-// bind返回的是一个未执行的方法。
-const myBind = (context) => {
-  const content = context || window;
-  context.fn = this;
-  const args = [...arguments].slice(1);
-  return function () {
-    // 只能执行一次………
-    const res = content.fn(...args);
-    delete content.fn;
-    return res;
-  };
-};
+// 优化后的 mybind
+Function.prototype.myBind = function (context, ...bindArgs) {
+  const originalFunc = this;
 
-// call的入参可以是多个参数
-// const myCall = (context) => {
-//   const content = context || window;
-//   context.fn = this;
-//   const args = [...arguments].slice(1);
-//   const res = content.fn(...args);
-//   delete content.fn;
-//   return res;
-// };
+  function boundFunc(...callArgs) {
+    // 判断是否通过 new 调用
+    const isNewCall = this instanceof boundFunc;
+
+    return originalFunc.apply(
+      isNewCall ? this : (context || window),
+      bindArgs.concat(callArgs)
+    );
+  }
+
+  // 保持原型链
+  if (originalFunc.prototype) {
+    boundFunc.prototype = Object.create(originalFunc.prototype);
+  }
+
+  return boundFunc;
+};
 
 // 优化后的 myCall
 Function.prototype.myCall = function (context, ...args) {
-  context = context || window;
+  // 处理原始值和非严格模式
+  context = context ? Object(context) : window;
+
   const fn = Symbol('fn');
   context[fn] = this;
+
   const result = context[fn](...args);
   delete context[fn];
+
   return result;
-}
-
-function greet(greeting) {
-  console.log(`${greeting}, ${this.name}!`);
-}
-const user = { name: 'Alice' };
-greet.myCall(user, 'Hello'); // 输出：Hello, Alice!
-
-
-// apply的入参是对象和类数组
-// const myApply = (context) => {
-//   const content = context || window;
-//   context.fn = this;
-//   const args = [...arguments].slice(1).flat();
-//   const res = content.fn(...args);
-//   delete content.fn;
-//   return res;
-// };
+};
 
 // 优化后的 myApply
 Function.prototype.myApply = function (context, argsArray) {
-  context = context || window;
+  // 参数校验
+  if (argsArray && !Array.isArray(argsArray) && !argsArray[Symbol.iterator]) {
+    throw new TypeError('第二个参数必须为数组或类数组对象');
+  }
+
+  context = context ? Object(context) : window;
   const fn = Symbol('fn');
   context[fn] = this;
-  const result = argsArray ? context[fn](...args) : context[fn]();
+
+  const result = argsArray
+    ? context[fn](...argsArray)
+    : context[fn]();
+
   delete context[fn];
   return result;
-}
+};
