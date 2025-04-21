@@ -47,7 +47,7 @@ const mySetIntervel = (fn, delay, times) => {
  * 节流函数
  * 原理：固定间隔内，第一次有效，之后的忽略
  * 场景：鼠标点击事件，连续快速点击(单位时间内只触发一次)
- *      监听滚动事件，比如是否滑到底部自动加载更多，用节流来判断
+ * 监听滚动事件，比如是否滑到底部自动加载更多，用节流来判断
  * */
 const throttle = (fn, delay) => {
   let content = this;
@@ -67,7 +67,7 @@ const throttle = (fn, delay) => {
  * 防抖函数
  * 原理：固定间隔内，只执行最后一次触发的
  * 场景：搜索联想，用户在不断输入值时，用防抖来节约请求资源
- *       window的 resize，只需窗口调整完成后，计算窗口的大小，防止重复渲染。
+ * window的 resize，只需窗口调整完成后，计算窗口的大小，防止重复渲染。
  * */
 const debounce = (fn, delay) => {
   let timer;
