@@ -20,7 +20,7 @@ Promise.limitedAll = function (promises, maxConcurrent = 15) {
 
         Promise.resolve(promises[index]())
           .then(value => {
-            results[index] = value;
+            if (!aborted) results[index] = value;  // 增加aborted检查
           })
           .catch(error => {
             if (!aborted) {
@@ -69,6 +69,20 @@ Promise.serialAll = function (promises) {
 
     next(); // 启动串行链
   });
+};
+
+Promise.serialAll = (promises) => {
+  return promises.reduce(
+    (chain, promise, index) => (
+      chain.then(results =>
+        Promise.resolve(promise).then(value => {
+          results[index] = value;
+          return results;
+        }
+        )
+      )
+    ),
+    Promise.resolve([]));
 };
 
 // 使用 reduce 实现更简洁的串行链
@@ -235,8 +249,3 @@ Promise.serialAll = promises =>
     // 初始化空结果数组（保留数组长度和空位）
     Promise.resolve(Array.from({ length: promises.length }))
   );
-
-
-
-
-
