@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // @ts-ignore
 import logo from './logo.svg';
 import './App.css';
 import Button from './components/button'
 
 function App() {
+  const [count, setCount] = useState<number>(0);
+
+  const resetCount = () => {
+    setCount(0);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount(pre => pre + 20);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +28,14 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn cva
+          现在状态: {count}
+        </Button>
+        <br />
+        <Button
+          type='reset'
+          onClick={resetCount}
+        >
+          Reset
         </Button>
       </header>
     </div>
