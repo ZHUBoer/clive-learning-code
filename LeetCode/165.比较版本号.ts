@@ -79,18 +79,34 @@
  */
 
 // @lc code=start
+/**
+ * 比较两个版本号字符串
+ * @param version1 第一个版本号字符串
+ * @param version2 第二个版本号字符串
+ * @returns 比较结果：1(version1 > version2), -1(version1 < version2), 0(相等)
+ */
 function compareVersion(version1: string, version2: string): number {
-  const arr1: any[] = version1.split('.')
-  const arr2: any[] = version2.split('.')
-  const maxLen = Math.max(arr1.length, arr2.length)
+  // 将版本号按点号分割成修订号数组
+  const revisions1: string[] = version1.split('.');
+  const revisions2: string[] = version2.split('.');
+  // 取两个版本号的最大长度，处理不同长度的情况
+  const maxLength = Math.max(revisions1.length, revisions2.length);
 
-  for (let i = 0; i < maxLen; i++) {
-    const num1 = Number(arr1[i]) || 0;
-    const num2 = Number(arr2[i]) || 0;
-    if (num1 > num2) return 1;
-    if (num1 < num2) return -1;
+  // 逐位比较修订号
+  for (let i = 0; i < maxLength; i++) {
+    // 将修订号转换为整数（自动忽略前导零）
+    // 使用 || '0' 处理数组越界情况（当版本号长度不一致时）
+    const revision1 = parseInt(revisions1[i] || '0', 10);
+    const revision2 = parseInt(revisions2[i] || '0', 10);
+
+    // 比较当前位修订号
+    if (revision1 > revision2) return 1;  // version1 > version2
+    if (revision1 < revision2) return -1; // version1 < version2
+    // 修订号相等时继续比较下一位
   }
-  return 0
+
+  // 所有修订号均相等
+  return 0;
 };
 // @lc code=end
 
